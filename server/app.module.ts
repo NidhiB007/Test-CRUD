@@ -6,7 +6,7 @@ import { TestModule } from "./src/test/test.module";
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost:27017/test_crud1", {
+    MongooseModule.forRoot("mongodb://localhost:27017/test_crud", {
       useNewUrlParser: true,
     }),
     AngularUniversalModule.forRoot({

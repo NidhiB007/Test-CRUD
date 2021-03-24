@@ -8,7 +8,7 @@ export class TestController {
 
   @Get()
   async getAllTest() {
-    const tests = this._testService.getTests();
+    const tests = await this._testService.getTests();
     return tests;
   }
 
@@ -20,7 +20,7 @@ export class TestController {
 
   @Post()
   async SaveTest(@Body() query: Test) {
-    const result = this._testService.saveTest(query);
+    const result = await this._testService.saveTest(query);
     return result;
   }
 }
