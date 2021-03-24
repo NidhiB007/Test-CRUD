@@ -13,6 +13,10 @@ export class DashboardService {
   }
 
   getQuestions() {
-    return this._http.get<any>(`localhost:4200/api/questions`);
+    return this._http.get<any>(`localhost:4200/api/test/questions`);
+  }
+
+  saveTest(query) {
+    return this._http.post<any>(`localhost:4200/api/test`, query);
   }
 }

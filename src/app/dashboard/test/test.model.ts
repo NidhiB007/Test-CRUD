@@ -3,5 +3,6 @@ export class Question {
   question: string;
   options: string[] = [];
   answer: string;
-  isCorrect: boolean = null;
+  isCorrect: boolean = false;
+  marks?: number = 5;
 }

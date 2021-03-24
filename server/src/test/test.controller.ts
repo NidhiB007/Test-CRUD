@@ -1,10 +1,19 @@
-import { Controller, Get, Header } from "@nestjs/common";
+import { Controller, Get, Header, Post } from "@nestjs/common";
 
 @Controller("test")
 export class TestController {
   @Get()
-  @Header("Access-Control-Allow-Origin", "*")
   getAllTest() {
-    return "Hello World!!";
+    return { status: "SUCCESS", data: [] };
+  }
+
+  @Get("questions")
+  getAllQuestions() {
+    return { status: "SUCCESS", data: [] };
+  }
+
+  @Post()
+  SaveTest() {
+    return { status: "SUCCESS" };
   }
 }
