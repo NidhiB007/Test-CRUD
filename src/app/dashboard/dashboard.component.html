@@ -11,7 +11,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let test of tests">
-          <td>{{test.id}}</td>
+          <td>{{test._id}}</td>
           <td>{{test.name}}</td>
           <td>{{test.marks}}</td>
           <td>{{test.duration}}</td>
@@ -21,6 +21,6 @@
     <div class="p-3 mb-2 bg-dark text-white">
       <span>Total Records: {{tests.length}}</span>
       <span class="float-right">Average Marks: {{averageMark.toFixed(2)}}</span>
-      <span class="float-right mr-2">Average Duration: {{averageDuration}}</span>
+      <span class="float-right mr-2">Average Duration: {{averageDuration.toFixed(2)}}</span>
     </div>
   </div>

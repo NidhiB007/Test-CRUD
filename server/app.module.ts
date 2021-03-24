@@ -6,9 +6,9 @@ import { TestModule } from "./src/test/test.module";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      "mongodb://localhost:27017/test_crud?readPreference=primary&appname=MongoDB%20Compass&ssl=false"
-    ),
+    MongooseModule.forRoot("mongodb://localhost:27017/test_crud1", {
+      useNewUrlParser: true,
+    }),
     AngularUniversalModule.forRoot({
       viewsPath: join(process.cwd(), "dist/browser"),
       bundle: require("../server/main"),

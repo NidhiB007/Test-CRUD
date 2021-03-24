@@ -1,5 +1,5 @@
 export class Test {
-  id: number;
+  _id: number;
   name: string;
   marks: number = 0;
   duration: number = 30;

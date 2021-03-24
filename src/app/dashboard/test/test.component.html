@@ -1,12 +1,11 @@
-<div class="container bg-secondary mt-sm-5 my-1 scroll">
-    Duration: {{duration}}
-    <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
-    <div class="question ml-sm-5 pl-sm-5 pt-2" *ngFor="let question of questions; let index">
-        <div class="py-2 h5"><b>{{question.id}}. {{question.question}}</b></div>
+<div class="container bg-dark mt-sm-5 my-1 scroll">
+    <div class="p-3 mb-2 bg-dark text-white">Duration: {{duration}}</div>
+    <div class="question text-white ml-sm-5 pl-sm-5 pt-2" *ngFor="let question of questions; let i = index;">
+        <div class="py-2 h5"><b>{{i + 1}}. {{question.question}}</b></div>
         <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options"> 
             <label class="options" *ngFor="let option of question.options">
                 {{option}}
-                <input type="radio" [name]="question.id" [value]="option" (change)="onAnswerSelect($event, question.id)"> 
+                <input type="radio" [name]="question._id" [value]="option" (change)="onAnswerSelect($event, question._id)"> 
                 <span class="checkmark"></span> 
             </label> 
         </div>

@@ -12,7 +12,6 @@ export class TestService {
   tests: Test[] = [];
   questions: Question[] = [
     {
-      id: 1,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -25,7 +24,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 2,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -38,7 +36,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 3,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -51,7 +48,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 4,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -64,7 +60,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 5,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -77,7 +72,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 6,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -90,7 +84,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 7,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -103,7 +96,6 @@ export class TestService {
       marks: 10,
     },
     {
-      id: 8,
       question: "which option best describes your job role?",
       options: [
         "Small Business Owner or Employee",
@@ -119,20 +111,23 @@ export class TestService {
 
   async getTests() {
     const tests = await this.testModel.find().exec();
-    console.log("tests", tests);
-
     return { status: "SUCCESS", data: tests };
   }
 
   async saveTest(query: Test) {
-    this.tests.push(query);
     const newTest = new this.testModel(query);
     await newTest.save();
-    return { status: "SUCCESS", data: [query] };
+    return { status: "SUCCESS", data: newTest };
   }
 
+  async addQuestions() {}
+
   async getQuestions() {
-    const questions = await this.questionModel.find().exec();
+    let questions = await this.questionModel.find().exec();
+    if (questions.length === 0) {
+      await this.questionModel.create(this.questions);
+      questions = await this.questionModel.find().exec();
+    }
     return { status: "SUCCESS", data: questions };
   }
 }

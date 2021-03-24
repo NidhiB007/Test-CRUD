@@ -42,7 +42,7 @@ export class TestComponent implements OnInit {
   }
 
   onAnswerSelect(event, id) {
-    const index = this.questions.findIndex((q) => q.id === +id);
+    const index = this.questions.findIndex((q) => q._id === id);
     if (this.questions[index].answer === event.target.value)
       this.questions[index].isCorrect = true;
   }
@@ -50,13 +50,11 @@ export class TestComponent implements OnInit {
   onTestSubmit() {
     clearInterval(this.interval);
     let query = new Test();
-    query.id = new Date().getTime();
     query.name = "new test";
     query.marks = _.sumBy(this.questions, function (question) {
       return question.isCorrect ? question.marks : 0;
     });
     query.duration = this.duration;
-    console.log("query", query);
     this._router.navigate(["/dashboard"], {
       queryParams: {},
     });
