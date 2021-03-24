@@ -16,70 +16,18 @@ export class TestComponent implements OnInit {
     private dashboardService: DashboardService,
     private _router: Router
   ) {}
-  questions: Question[] = [
-    {
-      id: 1,
-      question: "which option best describes your job role?",
-      options: [
-        "Small Business Owner or Employee",
-        "Nonprofit Owner or Employee",
-        "Journalist or Activist",
-        "Other",
-      ],
-      answer: "Other",
-      isCorrect: null,
-      marks: 10,
-    },
-    {
-      id: 2,
-      question: "which option best describes your job role?",
-      options: [
-        "Small Business Owner or Employee",
-        "Nonprofit Owner or Employee",
-        "Journalist or Activist",
-        "Other",
-      ],
-      answer: "Other",
-      isCorrect: null,
-      marks: 10,
-    },
-    {
-      id: 3,
-      question: "which option best describes your job role?",
-      options: [
-        "Small Business Owner or Employee",
-        "Nonprofit Owner or Employee",
-        "Journalist or Activist",
-        "Other",
-      ],
-      answer: "Other",
-      isCorrect: null,
-      marks: 10,
-    },
-    {
-      id: 4,
-      question: "which option best describes your job role?",
-      options: [
-        "Small Business Owner or Employee",
-        "Nonprofit Owner or Employee",
-        "Journalist or Activist",
-        "Other",
-      ],
-      answer: "Other",
-      isCorrect: null,
-      marks: 10,
-    },
-  ];
+  questions: Question[] = [];
   duration: number = 30;
   ngOnInit() {
-    // this.getAllQustionList();
-    this.startTimer();
+    this.getAllQustionList();
   }
 
   getAllQustionList() {
-    this.dashboardService.getQuestions().subscribe((results) => {
-      console.log(results);
-      this.startTimer();
+    this.dashboardService.getQuestions().subscribe((result) => {
+      if (result.status === "SUCCESS") {
+        this.questions = result.data;
+        this.startTimer();
+      }
     });
   }
 
@@ -102,6 +50,7 @@ export class TestComponent implements OnInit {
   onTestSubmit() {
     clearInterval(this.interval);
     let query = new Test();
+    query.id = new Date().getTime();
     query.name = "new test";
     query.marks = _.sumBy(this.questions, function (question) {
       return question.isCorrect ? question.marks : 0;
@@ -111,7 +60,7 @@ export class TestComponent implements OnInit {
     this._router.navigate(["/dashboard"], {
       queryParams: {},
     });
-    this.dashboardService.saveTest(this.questions).subscribe((results) => {
+    this.dashboardService.saveTest(query).subscribe((results) => {
       console.log(results);
       this._router.navigate(["/dashboard"], {
         queryParams: {},
