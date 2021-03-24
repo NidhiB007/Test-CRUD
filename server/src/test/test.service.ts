@@ -1,8 +1,14 @@
 import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 import { Question, Test } from "./test.model";
 
 @Injectable()
 export class TestService {
+  constructor(
+    @InjectModel("Test") private readonly testModel: Model<any>,
+    @InjectModel("Question") private readonly questionModel: Model<any>
+  ) {}
   tests: Test[] = [];
   questions: Question[] = [
     {
@@ -111,17 +117,22 @@ export class TestService {
     },
   ];
 
-  getTests() {
-    return { status: "SUCCESS", data: [...this.tests] };
+  async getTests() {
+    const tests = await this.testModel.find().exec();
+    console.log("tests", tests);
+
+    return { status: "SUCCESS", data: tests };
   }
 
-  saveTest(query: Test) {
-    query.id = new Date().getTime();
+  async saveTest(query: Test) {
     this.tests.push(query);
+    const newTest = new this.testModel(query);
+    await newTest.save();
     return { status: "SUCCESS", data: [query] };
   }
 
-  getQuestions() {
-    return { status: "SUCCESS", data: [...this.questions] };
+  async getQuestions() {
+    const questions = await this.questionModel.find().exec();
+    return { status: "SUCCESS", data: questions };
   }
 }

@@ -7,19 +7,20 @@ export class TestController {
   constructor(public readonly _testService: TestService) {}
 
   @Get()
-  getAllTest() {
-    return this._testService.getTests();
+  async getAllTest() {
+    const tests = this._testService.getTests();
+    return tests;
   }
 
   @Get("questions")
-  getAllQuestions() {
-    return this._testService.getQuestions();
+  async getAllQuestions() {
+    const questions = await this._testService.getQuestions();
+    return questions;
   }
 
   @Post()
-  SaveTest(@Body() query: Test) {
-    console.log(query);
-
-    return this._testService.saveTest(query);
+  async SaveTest(@Body() query: Test) {
+    const result = this._testService.saveTest(query);
+    return result;
   }
 }
