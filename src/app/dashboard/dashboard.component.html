@@ -1,18 +1,21 @@
 <div class="container">
-    <h2>Test List</h2>
+    <!-- <h2>Test List</h2> -->
+    <button type="button" class="mb-2 mt-2 btn btn-dark" (click)="addTest()">Add Test</button>
     <table class="table table-dark table-hover">
       <thead>
         <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
+          <th>Index</th>
+          <th>Name</th>
+          <th>Marks</th>
+          <th>Duration</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>john@example.com</td>
+        <tr *ngFor="let test of tests">
+          <td>{{test.id}}</td>
+          <td>{{test.name}}</td>
+          <td>{{test.marks}}</td>
+          <td>{{test.duration}}</td>
         </tr>
       </tbody>
     </table>

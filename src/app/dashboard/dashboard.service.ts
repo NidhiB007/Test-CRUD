@@ -9,6 +9,10 @@ export class DashboardService {
   constructor(private _http: HttpClient) {}
 
   getTestList() {
-    return this._http.get<any>(`${environment.apiBaseUrl}/api/test`);
+    return this._http.get<any>(`localhost:4200/api/test`);
+  }
+
+  getQuestions() {
+    return this._http.get<any>(`localhost:4200/api/questions`);
   }
 }
