@@ -59,7 +59,6 @@ export class TestComponent implements OnInit {
       queryParams: {},
     });
     this.dashboardService.saveTest(query).subscribe((results) => {
-      console.log(results);
       this._router.navigate(["/dashboard"], {
         queryParams: {},
       });
