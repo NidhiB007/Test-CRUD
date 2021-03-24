@@ -55,9 +55,6 @@ export class TestComponent implements OnInit {
       return question.isCorrect ? question.marks : 0;
     });
     query.duration = this.duration;
-    this._router.navigate(["/dashboard"], {
-      queryParams: {},
-    });
     this.dashboardService.saveTest(query).subscribe((results) => {
       this._router.navigate(["/dashboard"], {
         queryParams: {},
